@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+ 
+</head>
+<style>
+body{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  color: white;
+  background: url(pexels-photo-6526181.jpeg);
+}
+#countdown {
+  background:rgba(23, 24, 22, 0.3);
+  padding: 40px 60px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px;
+  background-color: rgb(114, 98, 98);
+  text-align: center;
+}
+
+#timer {
+  font-size: 3rem;
+  letter-spacing: 3px;
+}
+
+.timer-unit {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 10px;
+  display: inline;
+}
+</style>
+
+<body>
+  <div id="countdown">
+      <p id="timer">
+          <span id="days"></span>
+          <span class="timer-unit">Days</span>
+          <span id="hours"></span>
+          <span class="timer-unit">Hours</span>
+          <span id="minutes"></span>
+          <span class="timer-unit">Minutes</span>
+          <span id="seconds"></span>
+          <span class="timer-unit">Seconds</span>
+      </p>
+ </div>
+ <script>
+  const currentYear = new Date().getFullYear();
+  const newYear = new Date('jan 1 2025 00:00:00');
+
+function updateCountdown() {
+  const currentDate = new Date();
+  const difference = newYear - currentDate;
+  /* 1000s=1s
+  60s=1m
+  60m=1hr
+  24hr=1 day*/
+
+  const days = Math.floor(difference /1000/60/60/24);
+  const hours = Math.floor((difference /1000/60/60)%24);
+  const minutes = Math.floor((difference/1000/60)%60);
+  const seconds = Math.floor((difference/1000)%60);
+  
+  document.getElementById("days").innerText = days;
+  document.getElementById("hours").innerText = hours;
+  document.getElementById("minutes").innerText = minutes;
+  document.getElementById("seconds").innerText = seconds;
+
+  if (difference < 0) {
+      clearInterval(interval);
+      document.getElementById("timer").innerText = "The event has started!";
+  }
+}
+
+const interval = setInterval(updateCountdown, 1000);
+ </script>
+</body>
+</html>
